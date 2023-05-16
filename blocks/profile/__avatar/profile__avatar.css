@@ -1,0 +1,8 @@
+.profile__avatar {
+  outline: 1px solid aqua;
+  border-radius: 50%;
+  min-width: 120px;
+  min-height: 120px;
+  background-image: url("../../../image/profile-avatar.jpg");
+  margin-right: 30px;
+}

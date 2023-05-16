@@ -1,0 +1,9 @@
+.profile__info {
+  display: grid;
+  grid-template-columns: 1fr 24px;
+  grid-template-rows: repeat(2, min-content);
+  outline: 1px solid green;
+  row-gap: 16px;
+  column-gap: 18px;
+}
+
