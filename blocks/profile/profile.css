@@ -1,0 +1,6 @@
+.profile {
+  display: grid;
+  grid-template-columns: 120px 336px 150px;
+  align-items: center;
+  outline: 1px solid yellow;
+}
