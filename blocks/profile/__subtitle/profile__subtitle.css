@@ -1,7 +1,17 @@
 .profile__subtitle {
   grid-row: 2;
+  grid-column: span 2;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   margin: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__subtitle {
+    grid-column: span 3;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
 }

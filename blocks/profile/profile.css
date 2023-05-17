@@ -1,6 +1,12 @@
 .profile {
   display: grid;
-  grid-template-columns: 120px 336px 150px;
+  grid-template-columns: 120px 1fr 1fr;
   align-items: center;
-  outline: 1px solid yellow;
 }
+
+@media screen and (max-width: 767px) {
+  .profile {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+} 

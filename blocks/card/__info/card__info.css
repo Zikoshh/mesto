@@ -1,9 +1,7 @@
-.element__info {
-  background-color: #FFF;
+.card__info {
   color: black;
   display: flex;
   min-height: 80px;
   align-items: center;
   justify-content: center;
-  border-radius: 0 0 10px 10px;
 }
