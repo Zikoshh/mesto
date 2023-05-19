@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
+  <script src="./scripts/index.js" defer></script>
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -82,19 +83,16 @@
       <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
   </main>
-  <section class="popup popup_opened ">
-    <button class="popup__close" type="button"></button>
+  <section class="popup">
     <div class="popup__container">
-      <h2 class="popup__title"></h2>
-      <div class="popup__content">
-        <form class="popup__form" action="">
-          <input class="popup__input" type="text">
-          <input class="popup__input" type="text">
-          <button class="popup__submit" type="submit"></button>
-        </form>
-      </div>
+      <button class="popup__close" type="button"></button>
+      <form class="popup__form" action="#">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input id="username" class="popup__input" type="text">
+        <input id="userjob" class="popup__input" type="text">
+        <button class="popup__submit" type="submit">Сохранить</button>
+      </form>
     </div>
   </section>
-  <script></script>
 </body>
 </html>
