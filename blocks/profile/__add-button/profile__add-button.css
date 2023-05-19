@@ -6,6 +6,7 @@
   width: 100%;
   min-height: 50px;
   justify-self: end;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {

@@ -1,13 +1,7 @@
 .profile__avatar {
-  outline: 1px solid aqua;
   border-radius: 50%;
   max-width: 120px;
   width: 100%;
   min-height: 120px;
   background: url("../../../image/profile-avatar.jpg") no-repeat center;
-}
-
-@media screen and (max-width: 767px) {
-  .profile__avatar {
-  }
 }

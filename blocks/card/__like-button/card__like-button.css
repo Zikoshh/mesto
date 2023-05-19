@@ -4,6 +4,11 @@
   background: url("../../../image/like.svg") no-repeat center;
   max-width: 22px;
   width: 100%;
+  cursor: pointer;
+}
+
+.card__like-button:hover {
+  opacity: .5;
 }
 
 .card__like-button:active {
