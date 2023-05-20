@@ -11,7 +11,6 @@
 <body class="page">
   <header class="header page__header">
     <img class="header__logo" src="./image/header-logo.svg" alt="Логотип">
-    <div class="header__line"></div>
   </header>
   <main class="content">
     <section class="profile">
@@ -24,60 +23,48 @@
       <button class="profile__add-button" type="button"></button>
     </section>
     <section class="cards page__cards">
-      <div class="card page__card">
+      <article class="card">
         <img class="card__image" src="./image/dombai.jpg" alt="Домбай">
         <div class="card__info">
-          <div class="card__container">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
+          <h2 class="card__title">Домбай</h2>
+          <button class="card__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="card page__card">
+      </article>
+      <article class="card">
         <img class="card__image" src="./image/dombai.jpg" alt="Домбай">
         <div class="card__info">
-          <div class="card__container">
-            <h2 class="card__title">Домбай</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
+          <h2 class="card__title">Домбай</h2>
+          <button class="card__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="card page__card">
+      </article>
+      <article class="card">
         <img class="card__image" src="./image/elbrus.jpg" alt="Эльбрус">
         <div class="card__info">
-          <div class="card__container">
-            <h2 class="card__title">Эльбрус</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
+          <h2 class="card__title">Эльбрус</h2>
+          <button class="card__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="card page__card">
+      </article>
+      <article class="card">
         <img class="card__image" src="./image/elbrus.jpg" alt="Эльбрус">
         <div class="card__info">
-          <div class="card__container">
-            <h2 class="card__title">Эльбрус</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
+          <h2 class="card__title">Эльбрус</h2>
+          <button class="card__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="card page__card">
+      </article>
+      <article class="card">
         <img class="card__image" src="./image/karachaevsk.jpg" alt="Карачаевск">
         <div class="card__info">
-          <div class="card__container">
-            <h2 class="card__title">Карачаевск</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
+          <h2 class="card__title">Карачаевск</h2>
+          <button class="card__like-button" type="button"></button>
         </div>
-      </div>
-      <div class="card page__card">
+      </article>
+      <article class="card">
         <img class="card__image" src="./image/karachaevsk.jpg" alt="Карачаевск">
         <div class="card__info">
-          <div class="card__container">
-            <h2 class="card__title">Карачаевск</h2>
-            <button class="card__like-button" type="button"></button>
-          </div>
+          <h2 class="card__title">Карачаевск</h2>
+          <button class="card__like-button" type="button"></button>
         </div>
-      </div>
+      </article>
     </section>
     <footer class="footer page__footer">
       <p class="footer__text">© 2020 Mesto Russia</p>
@@ -86,10 +73,10 @@
   <section class="popup">
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
-      <form class="popup__form" action="#">
+      <form class="popup__form" action="#" name="editProfile">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input id="username" class="popup__input" type="text" placeholder="username">
-        <input id="userjob" class="popup__input" type="text" placeholder="userjob">
+        <input class="popup__input popup__input_user_name" type="text" placeholder="Введите имя">
+        <input class="popup__input popup__input_user_job" type="text" placeholder="Введите профессию">
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
