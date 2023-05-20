@@ -3,5 +3,6 @@
   display: flex;
   min-height: 80px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0 15px 0 21px;
 }

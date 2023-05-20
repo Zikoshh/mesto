@@ -5,12 +5,9 @@
   max-width: 22px;
   width: 100%;
   cursor: pointer;
+  min-height: 19px;
 }
 
 .card__like-button:hover {
   opacity: .5;
-}
-
-.card__like-button:active {
-  background-image: url("../../../image/black-heart.svg");
 }

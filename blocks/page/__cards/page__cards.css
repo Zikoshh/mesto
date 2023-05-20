@@ -1,5 +1,5 @@
 .page__cards {
-  margin-top: 51px;
+  margin: 51px auto 0;
 }
 
 @media screen and (max-width: 767px) {
