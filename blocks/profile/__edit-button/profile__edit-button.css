@@ -8,6 +8,7 @@
   background: url("../../../image/edit-button-vector.svg") no-repeat center;
   align-self: end;
   cursor: pointer;
+  margin-bottom: 8px;
 }
 
 .profile__edit-button:hover {
@@ -20,5 +21,6 @@
     max-width: 18px;
     min-height: 18px;
     background-image: url("../../../image/edit-button-vector-m.svg");
+    margin-bottom: 6px;
   }
 }

@@ -7,6 +7,12 @@
   padding: 0;
 }
 
+@media screen and (max-width: 900px) {
+  .page {
+    max-width: 96%;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .page {
     max-width: 320px;
