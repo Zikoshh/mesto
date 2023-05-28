@@ -1,11 +1,15 @@
-const popup = document.querySelector(".popup");
-const popupEdit = document.querySelector(".profile__edit-button");
-const popupClose = document.querySelector(".popup__close");
-const userName = popup.querySelector(".popup__input_user_name");
-const userJob = popup.querySelector(".popup__input_user_job");
+const editPopup = document.querySelector(".popup_edit");
+const addPopup = document.querySelector(".popup_add");
+const editButton = document.querySelector(".profile__edit-button");
+const addButton = document.querySelector(".profile__add-button");
+const popupCloseEdit = document.querySelector(".popup__close_edit");
+const popupCloseAdd = document.querySelector(".popup__close_add");
+const userName = document.querySelector(".popup__input_user_name");
+const userJob = document.querySelector(".popup__input_user_job");
 const defaultUserName = document.querySelector(".profile__title");
 const defaultUserJob = document.querySelector(".profile__subtitle");
-const formElement = popup.querySelector(".popup__form");
+const editForm = document.querySelector(".popup__form_edit");
+const addForm = document.querySelector(".popup__form_add");
 
 
 function openPopup(attribute) {
@@ -19,17 +23,22 @@ function closePopup(attribute) {
 };
 
 
-popupEdit.addEventListener("click", function() {
-  openPopup(popup);
-});
+editButton.addEventListener("click", () => openPopup(editPopup));
 
-popupClose.addEventListener("click", function() {
-  closePopup(popup);
-});
+popupCloseEdit.addEventListener("click", () => closePopup(editPopup));
 
-formElement.addEventListener("submit", function(event) {
-  event.preventDefault();
+addButton.addEventListener("click", () => openPopup(addPopup));
+
+popupCloseAdd.addEventListener("click", () => closePopup(addPopup));
+
+editForm.addEventListener("submit", function(evt) {
+  evt.preventDefault();
   defaultUserName.textContent = userName.value;
   defaultUserJob.textContent = userJob.value;
   closePopup(popup);
+});
+
+addForm.addEventListener("submit", function(evt) {
+  evt.preventDefault();
+  
 });
