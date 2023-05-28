@@ -22,50 +22,7 @@
       </div>
       <button class="profile__add-button" type="button"></button>
     </section>
-    <section class="cards page__cards">
-      <article class="card">
-        <img class="card__image" src="./image/dombai.jpg" alt="Домбай">
-        <div class="card__info">
-          <h2 class="card__title">Домбай</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" src="./image/dombai.jpg" alt="Домбай">
-        <div class="card__info">
-          <h2 class="card__title">Домбай</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" src="./image/elbrus.jpg" alt="Эльбрус">
-        <div class="card__info">
-          <h2 class="card__title">Эльбрус</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" src="./image/elbrus.jpg" alt="Эльбрус">
-        <div class="card__info">
-          <h2 class="card__title">Эльбрус</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" src="./image/karachaevsk.jpg" alt="Карачаевск">
-        <div class="card__info">
-          <h2 class="card__title">Карачаевск</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img class="card__image" src="./image/karachaevsk.jpg" alt="Карачаевск">
-        <div class="card__info">
-          <h2 class="card__title">Карачаевск</h2>
-          <button class="card__like-button" type="button"></button>
-        </div>
-      </article>
-    </section>
+    <section class="cards page__cards"></section>
     <footer class="footer page__footer">
       <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
@@ -87,10 +44,20 @@
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form popup__form_add" action="#" name="addCard">
         <input class="popup__input popup__input_place_name" type="text" placeholder="Название">
-        <input class="popup__input popup__input_place_src" type="text" placeholder="Ссылка на картинку">
+        <input class="popup__input popup__input_place_image" type="text" placeholder="Ссылка на картинку">
         <button class="popup__submit" type="submit">Создать</button>
       </form>
     </div>
   </section>
+  <template class="card-template">
+    <article class="card">
+      <button class="card__delete-button" type="button"></button>
+      <img class="card__image" src="" alt="">
+      <div class="card__info">
+        <h2 class="card__title"></h2>
+        <button class="card__like-button" type="button"></button>
+      </div>
+    </article>
+  </template>
 </body>
 </html>
