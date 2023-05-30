@@ -1,4 +1,4 @@
-.popup__opened {
+.popupImage_opened {
   pointer-events: auto;
   opacity: 1;
   transform: scale(1);
