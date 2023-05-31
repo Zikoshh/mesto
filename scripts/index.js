@@ -52,14 +52,14 @@ const initialCards = [
 
 
 
-function createCard(item) {
+function createCard(name, link) {
   const newCard = card.cloneNode(true); /*cloneCardTemplate*/
 
   const newCardImage = newCard.querySelector(".card__image"); 
-  newCardImage.src = item.link;
-  newCardImage.alt = item.name;
+  newCardImage.src = link;
+  newCardImage.alt = name;
   const newCardTitle = newCard.querySelector(".card__title");
-  newCardTitle.textContent = item.name;
+  newCardTitle.textContent = name;
 
   const deleteButton = newCard.querySelector(".card__delete-button"); /*deleteButton*/
   deleteButton.addEventListener("click", function() {
@@ -98,7 +98,7 @@ function closePopup(attribute) {
 
 
 initialCards.forEach(function(item) {
-  const newCard = createCard(item);
+  const newCard = createCard(item.name, item.link);
   cards.prepend(newCard);
 });
 
@@ -119,7 +119,7 @@ editForm.addEventListener("submit", function(evt) {
 
 addForm.addEventListener("submit", function(evt) {
   evt.preventDefault();
-  const newCard = createCard(placeName.value, placeImage.value)
+  const newCard = createCard(placeName.value, placeImage.value);
   cards.prepend(newCard);
 
   placeName.value = '';
