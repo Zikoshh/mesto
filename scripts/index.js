@@ -119,7 +119,9 @@ editForm.addEventListener("submit", function(evt) {
 
 addForm.addEventListener("submit", function(evt) {
   evt.preventDefault();
-  const newCard = createCard(placeName.value, placeImage.value);
+  const placeNameValue = placeName.value;
+  const placeImageValue = placeImage.value;
+  const newCard = createCard(placeNameValue, placeImageValue);
   cards.prepend(newCard);
 
   placeName.value = '';
