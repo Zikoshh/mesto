@@ -1,8 +1,8 @@
 /*popupImage*/
-const popupImage = document.querySelector(".popupImage")
-const popupImageTitle = popupImage.querySelector(".popupImage__title");
-const popupImagePicture = popupImage.querySelector(".popupImage__picture");
-const popupImageClose = popupImage.querySelector(".popupImage__close");
+const imagePopup = document.querySelector(".popup_image")
+const imagePopupTitle = imagePopup.querySelector(".popup__title_image");
+const imagePopupPicture = imagePopup.querySelector(".popup__image");
+const imagePopupClose = imagePopup.querySelector(".popup__close_image");
 /*editForm*/
 const editPopup = document.querySelector(".popup_edit");
 const editButton = document.querySelector(".profile__edit-button");
@@ -22,33 +22,7 @@ const placeImage = addPopup.querySelector(".popup__input_place_image");
 const cardTemplate = document.querySelector(".card-template");
 const cardTemplateContent = cardTemplate.content;
 const card = cardTemplateContent.querySelector(".card");
-const cards = document.querySelector(".cards");
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const cardsContainer = document.querySelector(".cards");
 
 
 
@@ -63,7 +37,7 @@ function createCard(name, link) {
 
   const deleteButton = newCard.querySelector(".card__delete-button"); /*deleteButton*/
   deleteButton.addEventListener("click", function() {
-    cards.removeChild(newCard);
+    deleteButton.closest(".card").remove();
   })
   
   const cardLike = newCard.querySelector(".card__like-button"); /*likeButton*/
@@ -73,36 +47,54 @@ function createCard(name, link) {
 
   const cardImage = newCard.querySelector(".card__image"); /*popupImageOpened*/
   cardImage.addEventListener("click", function() {
-    popupImageTitle.textContent = newCardTitle.textContent;
-    popupImagePicture.src = newCardImage.src;
-    popupImage.classList.add("popupImage_opened");
-  })
-  
-  popupImageClose.addEventListener("click", function() { /*popupImageClose*/
-    popupImage.classList.remove("popupImage_opened");
+    imagePopupTitle.textContent = newCardTitle.textContent;
+    imagePopupPicture.src = newCardImage.src;
+    openPopup(imagePopup);
   })
 
   return newCard
 };
 
-function openPopup(attribute) {
-  attribute.classList.add("popup__opened");
-  userName.value = defaultUserName.textContent; 
-  userJob.value = defaultUserJob.textContent;
+function openPopup(popup) {
+  popup.classList.add("popup_opened");
 };
 
-function closePopup(attribute) {
-  attribute.classList.remove("popup__opened");
+function closePopup(popup) {
+  popup.classList.remove("popup_opened");
+};
+
+function openProfilePopup(popup) {
+  userName.value = defaultUserName.textContent; 
+  userJob.value = defaultUserJob.textContent;
+  openPopup(popup);
+};
+
+function changeProfileInfo(form) {
+  form.preventDefault();
+  defaultUserName.textContent = userName.value;
+  defaultUserJob.textContent = userJob.value;
+  closePopup(editPopup);
+};
+
+function createNewCard(form) {
+  form.preventDefault();
+  const placeNameValue = placeName.value;
+  const placeImageValue = placeImage.value;
+  const newCard = createCard(placeNameValue, placeImageValue);
+  cardsContainer.prepend(newCard);
+
+  addForm.reset();
+  closePopup(addPopup);
 };
 
 
 
 initialCards.forEach(function(item) {
   const newCard = createCard(item.name, item.link);
-  cards.prepend(newCard);
+  cardsContainer.prepend(newCard);
 });
 
-editButton.addEventListener("click", () => openPopup(editPopup));
+editButton.addEventListener("click", () => openProfilePopup(editPopup));
 
 popupCloseEdit.addEventListener("click", () => closePopup(editPopup));
 
@@ -110,21 +102,8 @@ addButton.addEventListener("click", () => openPopup(addPopup));
 
 popupCloseAdd.addEventListener("click", () => closePopup(addPopup));
 
-editForm.addEventListener("submit", function(evt) {
-  evt.preventDefault();
-  defaultUserName.textContent = userName.value;
-  defaultUserJob.textContent = userJob.value;
-  closePopup(editPopup);
-});
+imagePopupClose.addEventListener("click", () => closePopup(imagePopup));
 
-addForm.addEventListener("submit", function(evt) {
-  evt.preventDefault();
-  const placeNameValue = placeName.value;
-  const placeImageValue = placeImage.value;
-  const newCard = createCard(placeNameValue, placeImageValue);
-  cards.prepend(newCard);
+editForm.addEventListener("submit", changeProfileInfo);
 
-  placeName.value = '';
-  placeImage.value = '';
-  closePopup(addPopup);
-});
+addForm.addEventListener("submit", createNewCard);

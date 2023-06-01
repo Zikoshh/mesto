@@ -39,10 +39,6 @@
 @import url("../blocks/popup/__submit/popup__submit.css");
 @import url("../blocks/popup/__title/popup__title.css");
 @import url("../blocks/popup/_opened/popup_opened.css");
-/*popupImage*/
-@import url("../blocks/popupImage/popupImage.css");
-@import url("../blocks/popupImage/__title/popupImage__title.css");
-@import url("../blocks/popupImage/__close/popupImage__close.css");
-@import url("../blocks/popupImage/__picture/popupImage__picture.css");
-@import url("../blocks/popupImage/_opened/popupImage_opened.css");
-@import url("../blocks/popupImage/__container/popupImage__container.css");
+@import url("../blocks/popup/__image/popup__image.css");
+@import url("../blocks/popup/__title/_image/popup__title_image.css");
+@import url("../blocks/popup/_image/popup_image.css");
