@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="./scripts/index.js" defer></script>
   <title>Mesto</title>
 </head>
 <body class="page">
@@ -38,9 +37,13 @@
     <div class="popup__container">
       <button class="popup__close popup__close_edit" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form popup__form_edit" action="#" name="editProfile">
-        <input class="popup__input popup__input_user_name" type="text" placeholder="Введите имя">
-        <input class="popup__input popup__input_user_job" type="text" placeholder="Введите профессию">
+      <form class="popup__form popup__form_edit" action="#" name="editProfile" novalidate>
+        <label class="popup__label" for="username">
+          <input class="popup__input popup__input_user_name" name="username" type="text" placeholder="Введите имя">
+        </label>
+        <label class="popup__label" for="userInfo">
+          <input class="popup__input popup__input_user_info" name="userInfo" type="text" placeholder="О себе">
+        </label>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
@@ -49,9 +52,13 @@
     <div class="popup__container">
       <button class="popup__close popup__close_add" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form popup__form_add" action="#" name="addCard">
-        <input class="popup__input popup__input_place_name" type="text" placeholder="Название">
-        <input class="popup__input popup__input_place_image" type="text" placeholder="Ссылка на картинку">
+      <form class="popup__form popup__form_add" action="#" name="addCard" novalidate>
+        <label class="popup__label" for="placeName">
+          <input class="popup__input popup__input_place_name" name="placeName" type="text" placeholder="Название">
+        </label>
+        <label class="popup__label" for="placeLink">
+          <input class="popup__input popup__input_place_image" name="placeLink" type="text" placeholder="Ссылка на картинку">
+        </label>
         <button class="popup__submit" type="submit">Создать</button>
       </form>
     </div>
@@ -66,5 +73,7 @@
       </div>
     </article>
   </template>
+  <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

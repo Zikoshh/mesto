@@ -8,10 +8,10 @@ const editPopup = document.querySelector(".popup_edit");
 const editButton = document.querySelector(".profile__edit-button");
 const editForm = editPopup.querySelector(".popup__form_edit");
 const popupCloseEdit = editPopup.querySelector(".popup__close_edit");
-const userName = editPopup.querySelector(".popup__input_user_name");
-const userJob = editPopup.querySelector(".popup__input_user_job");
+const username = editPopup.querySelector(".popup__input_user_name");
+const userInfo = editPopup.querySelector(".popup__input_user_info");
 const defaultUserName = document.querySelector(".profile__title");
-const defaultUserJob = document.querySelector(".profile__subtitle");
+const defaultUserInfo = document.querySelector(".profile__subtitle");
 /*addForm*/
 const addPopup = document.querySelector(".popup_add");
 const addButton = document.querySelector(".profile__add-button");
@@ -87,18 +87,19 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  
 };
 
 function openProfilePopup(popup) {
-  userName.value = defaultUserName.textContent; 
-  userJob.value = defaultUserJob.textContent;
+  username.value = defaultUserName.textContent; 
+  userInfo.value = defaultUserInfo.textContent;
   openPopup(popup);
 };
 
 function changeProfileInfo(form) {
   form.preventDefault();
-  defaultUserName.textContent = userName.value;
-  defaultUserJob.textContent = userJob.value;
+  defaultUserName.textContent = username.value;
+  defaultUserInfo.textContent = userInfo.value;
   closePopup(editPopup);
 };
 
@@ -106,6 +107,9 @@ function createNewCard(form) {
   form.preventDefault();
   const placeNameValue = placeName.value;
   const placeImageValue = placeImage.value;
+  if (!(placeNameValue && placeImageValue)) {
+    return;
+  }
   const newCard = createCard(placeNameValue, placeImageValue);
   cardsContainer.prepend(newCard);
 
