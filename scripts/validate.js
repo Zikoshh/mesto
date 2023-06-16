@@ -8,8 +8,9 @@ const classNames = {
 };
 
 
+
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(`${classNames.form}`));
+  const formList = Array.from(document.querySelectorAll(`.${classNames.form}`));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', e => {
       e.preventDefault();
@@ -56,8 +57,8 @@ const checkInputValidity = (formElement, inputElement) => {
 };
 
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(`${classNames.formInput}`));
-  const submitButton = formElement.querySelector(`${classNames.formSubmit}`);
+  const inputList = Array.from(formElement.querySelectorAll(`.${classNames.formInput}`));
+  const submitButton = formElement.querySelector(`.${classNames.formSubmit}`);
   toggleButtonState(inputList, submitButton);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
@@ -66,6 +67,7 @@ const setEventListeners = (formElement) => {
     });
   });
 };
+
 
 
 enableValidation();

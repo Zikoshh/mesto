@@ -1,5 +1,7 @@
 .popup__error {
+  pointer-events: none;
   opacity: 0;
+  transition: 0.3s;
   color: red;
   font-weight: 400;
   font-size: 12px;

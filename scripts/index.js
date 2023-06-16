@@ -70,14 +70,12 @@ function closePopup(popup) {
 function openProfilePopup(popup) {
   username.value = defaultUserName.textContent; 
   userInfo.value = defaultUserInfo.textContent;
+  
   openPopup(popup);
 };
 
 function changeProfileInfo(form) {
   form.preventDefault();
-  if (!(username.value && userInfo.value)) {
-    return;
-  }
   defaultUserName.textContent = username.value;
   defaultUserInfo.textContent = userInfo.value;
   closePopup(editPopup);
@@ -87,9 +85,6 @@ function createNewCard(form) {
   form.preventDefault();
   const placeNameValue = placeName.value;
   const placeImageValue = placeImage.value;
-  if (!(placeNameValue && placeImageValue)) {
-    return;
-  }
   const newCard = createCard(placeNameValue, placeImageValue);
   cardsContainer.prepend(newCard);
   
