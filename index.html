@@ -38,11 +38,13 @@
       <button class="popup__close popup__close_edit" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_edit" action="#" name="editProfile" novalidate>
-        <label class="popup__label" for="username">
-          <input class="popup__input popup__input_user_name" name="username" type="text" placeholder="Введите имя">
+        <label for="username">
+          <input id="username" class="popup__input popup__input_user_name" name="username" type="text" placeholder="Введите имя" minlength="2" maxlength="40" required>
+          <p class="popup__error username-error"></p>
         </label>
-        <label class="popup__label" for="userInfo">
-          <input class="popup__input popup__input_user_info" name="userInfo" type="text" placeholder="О себе">
+        <label for="userInfo">
+          <input id="userInfo" class="popup__input popup__input_user_info" name="userInfo" type="text" placeholder="О себе" minlength="2" maxlength="200" required>
+          <p class="popup__error userInfo-error"></p>
         </label>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
@@ -53,11 +55,13 @@
       <button class="popup__close popup__close_add" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form popup__form_add" action="#" name="addCard" novalidate>
-        <label class="popup__label" for="placeName">
-          <input class="popup__input popup__input_place_name" name="placeName" type="text" placeholder="Название">
+        <label for="placeName">
+          <input id="placeName" class="popup__input popup__input_place_name" name="placeName" type="text" placeholder="Название" minlength="2" maxlength="30" required>
+          <p class="popup__error placeName-error">tatatat</p>
         </label>
-        <label class="popup__label" for="placeLink">
-          <input class="popup__input popup__input_place_image" name="placeLink" type="text" placeholder="Ссылка на картинку">
+        <label for="placeLink">
+          <input id="placeLink" class="popup__input popup__input_place_image" name="placeLink" type="url" placeholder="Ссылка на картинку" required>
+          <p class="popup__error placeLink-error">tatat</p>
         </label>
         <button class="popup__submit" type="submit">Создать</button>
       </form>
