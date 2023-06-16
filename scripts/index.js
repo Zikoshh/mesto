@@ -50,6 +50,7 @@ function createCard(name, link) {
   cardImage.addEventListener('click', function() {
     imagePopupTitle.textContent = newCardTitle.textContent;
     imagePopupPicture.src = newCardImage.src;
+    imagePopupPicture.alt = newCardTitle.textContent;
     openPopup(imagePopup);
   })
 
@@ -58,10 +59,12 @@ function createCard(name, link) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByOverlay);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByOverlay);
 };
 
 function openProfilePopup(popup) {
@@ -89,23 +92,24 @@ function createNewCard(form) {
   }
   const newCard = createCard(placeNameValue, placeImageValue);
   cardsContainer.prepend(newCard);
-
-  addForm.reset();
+  
   closePopup(addPopup);
+  addForm.reset();
+};
+
+function closePopupByOverlay(event) {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  };
 };
 
 
 
 popupList.forEach(popup => {
-  popup.addEventListener('click', event => { /*closePopupClickOnOverlay*/
+  popup.addEventListener('mousedown', event => { /*closePopupClickOnOverlay*/
     if (event.target === popup) {
       closePopup(popup)
-    }
-  });
-
-  document.addEventListener('keydown', event => { /*closePopupClickOnEscape*/
-    if (event.key === 'Escape') {
-      closePopup(popup);
     }
   });
 });

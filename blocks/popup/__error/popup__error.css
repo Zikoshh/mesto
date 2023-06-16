@@ -1,13 +1,10 @@
 .popup__error {
+  opacity: 0;
   color: red;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-  position: absolute;
-  top: 21px;
-  
-}
-
-.popup__error:nth-child(4) {
-  margin-bottom: 31.34px;
+  position: relative;
+  top: 5px;
+  margin: 0;
 }
