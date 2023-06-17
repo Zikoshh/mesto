@@ -8,6 +8,7 @@ const imagePopupClose = imagePopup.querySelector('.popup__close_image');
 const editPopup = document.querySelector('.popup_edit');
 const editButton = document.querySelector('.profile__edit-button');
 const editForm = editPopup.querySelector('.popup__form_edit');
+const editFormSubmit = editForm.querySelector('.popup__submit');
 const popupCloseEdit = editPopup.querySelector('.popup__close_edit');
 const username = editPopup.querySelector('.popup__input_user_name');
 const userInfo = editPopup.querySelector('.popup__input_user_info');
@@ -17,6 +18,7 @@ const defaultUserInfo = document.querySelector('.profile__subtitle');
 const addPopup = document.querySelector('.popup_add');
 const addButton = document.querySelector('.profile__add-button');
 const addForm = addPopup.querySelector('.popup__form_add');
+const addFormSubmit = addForm.querySelector('.popup__submit');
 const popupCloseAdd = addPopup.querySelector('.popup__close_add');
 const placeName = addPopup.querySelector('.popup__input_place_name');
 const placeImage = addPopup.querySelector('.popup__input_place_image');
@@ -59,17 +61,19 @@ function createCard(name, link) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByOverlay);
+  document.addEventListener('keydown', closePopupByEscape);
 };
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByOverlay);
+  document.removeEventListener('keydown', closePopupByEscape);
 };
 
 function openProfilePopup(popup) {
   username.value = defaultUserName.textContent; 
   userInfo.value = defaultUserInfo.textContent;
+  editFormSubmit.classList.remove('popup__submit_disabled');
+  editFormSubmit.removeAttribute('disabled', 'disabled');
   
   openPopup(popup);
 };
@@ -90,9 +94,11 @@ function createNewCard(form) {
   
   closePopup(addPopup);
   addForm.reset();
+  addFormSubmit.classList.add('popup__submit_disabled');
+  addFormSubmit.setAttribute('disabled', 'disabled');
 };
 
-function closePopupByOverlay(event) {
+function closePopupByEscape(event) {
   if (event.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
