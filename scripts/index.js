@@ -62,6 +62,8 @@ function createCard(name, link) {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEscape);
+  addFormSubmit.classList.add('popup__submit_disabled');
+  addFormSubmit.setAttribute('disabled', 'disabled');
 };
 
 function closePopup(popup) {
