@@ -1,19 +1,17 @@
-import { openImagePopup } from './index.js';
-
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, openImagePopup) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._openImagePopup = openImagePopup;
   }
 
   _getTemplate() {
-    const card = document
-    .querySelector(this._templateSelector)
-    .content
-    .querySelector('.card')
-    .cloneNode(true);
-    return card;
+    return document
+        .querySelector(this._templateSelector)
+        .content
+        .querySelector('.card')
+        .cloneNode(true);
   }
 
   _setEventListeners() {
@@ -26,7 +24,7 @@ export class Card {
     });
 
     this._newCardImage.addEventListener('click', () => {
-      openImagePopup(this._name, this._link);
+      this._openImagePopup(this._name, this._link);
     });
   }
 
@@ -35,7 +33,7 @@ export class Card {
   }
 
   _deleteCard() {
-    this._newCardDelete.closest('.card').remove();
+    this._newCard.remove();
   }
 
   generateCard() {
