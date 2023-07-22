@@ -16,3 +16,4 @@
 - [БЭМ](https://ru.bem.info/)
 - [Nested](https://ru.bem.info/methodology/filestructure/#nested)
 - [ООП](https://habr.com/ru/articles/463125/)
+- [Webpack](https://habr.com/ru/articles/514838/)

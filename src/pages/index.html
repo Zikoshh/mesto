@@ -4,12 +4,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
   <header class="header page__header">
-    <a href="#"><img class="header__logo" src="./image/header-logo.svg" alt="Логотип"></a>
+    <a href="#"><img class="header__logo" src="<%=require('../image/header-logo.svg')%>" alt="Логотип"></a>
   </header>
   <main class="content">
     <section class="profile">
@@ -39,12 +38,12 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_edit" action="#" name="editProfile" novalidate>
         <label for="username">
-          <input id="username" class="popup__input popup__input_user_name" name="username" type="text" placeholder="Введите имя" minlength="2" maxlength="40" required>
-          <p class="popup__error username-error"></p>
+          <input id="userName" class="popup__input popup__input_user-name" name="userName" type="text" placeholder="Введите имя" minlength="2" maxlength="40" required>
+          <p class="popup__error userName-error"></p>
         </label>
-        <label for="userInfo">
-          <input id="userInfo" class="popup__input popup__input_user_info" name="userInfo" type="text" placeholder="О себе" minlength="2" maxlength="200" required>
-          <p class="popup__error userInfo-error"></p>
+        <label for="aboutUser">
+          <input id="aboutUser" class="popup__input popup__input_about-user" name="aboutUser" type="text" placeholder="О себе" minlength="2" maxlength="200" required>
+          <p class="popup__error aboutUser-error"></p>
         </label>
         <button class="popup__submit" type="submit">Сохранить</button>
       </form>
@@ -77,6 +76,5 @@
       </div>
     </article>
   </template>
-  <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>

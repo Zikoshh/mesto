@@ -30,9 +30,9 @@ export class FormValidator {
 
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this.enableSubmitButton();
-    } else {
       this.disableSubmitButton();
+    } else {
+      this.enableSubmitButton();
     };
   }
 
@@ -64,12 +64,12 @@ export class FormValidator {
     errorElement.textContent = '';
   }
 
-  enableSubmitButton() {
+  disableSubmitButton() {
     this._submitButton.classList.add(`${this._submitDisabledSel}`);
     this._submitButton.setAttribute('disabled', 'disabled');
   }
 
-  disableSubmitButton() {
+  enableSubmitButton() {
     this._submitButton.classList.remove(`${this._submitDisabledSel}`);
     this._submitButton.removeAttribute('disabled', 'disabled');
   }
