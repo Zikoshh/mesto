@@ -48,6 +48,7 @@ export class Card {
     this._setEventListeners();
 
     this._newCardImage.src = this._link;
+    this._newCardImage.alt = this._name;
     this._newCardTitle.textContent = this._name;
 
     return this._newCard;

@@ -86,10 +86,10 @@ function createNewCard(inputValues) {
   cardsSection.addItem(newCard);
   
   formCard.close();
-  addPopupForm.disableSubmitButton();
 };
  
 addButton.addEventListener('click', () => {
+  addPopupForm.disableSubmitButton();
   formCard.open();
 });
 

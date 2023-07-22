@@ -36,7 +36,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name].[hash][ext]',
+            filename: 'images/[name].[hash][ext]',
         }
       },
       {
@@ -46,7 +46,7 @@ module.exports = {
         generator: {
           filename: 'fonts/[name].[hash][ext]',
         }
-      },
+      }, 
       {
         // применять это правило только к CSS-файлам
         test: /\.css$/,
@@ -63,7 +63,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html' // путь к файлу index.html
+      template: 'index.html' // путь к файлу index.html
     }),
 
     new CleanWebpackPlugin(),
