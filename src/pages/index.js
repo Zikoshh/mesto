@@ -1,14 +1,5 @@
 import './index.css';
 
-import { 
-  editButton, 
-  editForm, 
-  inputUserName, 
-  inputAboutUser, 
-  addButton, 
-  addForm, 
-  classesForValidation } from '../utils/constants.js';
-
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { initialCards } from '../components/InitialCards.js';
@@ -19,16 +10,32 @@ import UserInfo from '../components/UserInfo.js';
 
 
 
+const editButton = document.querySelector('.profile__edit-button');
+const editForm = document.querySelector('.popup__form_edit');
+const inputUserName = editForm.querySelector('.popup__input_user-name');
+const inputAboutUser = editForm.querySelector('.popup__input_about-user');
+const addButton = document.querySelector('.profile__add-button');
+const addForm = document.querySelector('.popup__form_add');
+/*Обьект с классами для валидации*/
+const classesForValidation = {
+  formInput: 'popup__input',
+  formInputInvalid: 'popup__input_invalid',
+  formSubmit: 'popup__submit',
+  formSubmitDisabled: 'popup__submit_disabled',
+  formErrorActive: 'popup__error_active'
+};
+
+
+
 /*Загрузка карточек которых уже есть в data*/ 
-const cardList = new Section({ 
-  items: initialCards, 
+const cardsSection = new Section({ 
   renderer: (item) => {
     const newCard = createCard(item, '.card-template', handleCardClick);
-    cardList.addItem(newCard);
+    cardsSection.addItem(newCard);
   } 
 }, '.cards');
 
-cardList.renderItems();
+cardsSection.renderItems(initialCards);
 
 
 /*Возвращает DOM элемент новой карточки*/ 
@@ -75,13 +82,8 @@ formCard.setEventListeners();
 
 /*Берет value инпутов addPopup'а и создает новую карточку*/ 
 function createNewCard(inputValues) {
-  const newCardData = {
-    name: inputValues.placeName,
-    link: inputValues.placeImage
-  }
-
-  const newCard = createCard(newCardData, '.card-template', handleCardClick);
-  cardList.addItem(newCard);
+  const newCard = createCard(inputValues, '.card-template', handleCardClick);
+  cardsSection.addItem(newCard);
   
   formCard.close();
   addPopupForm.disableSubmitButton();
