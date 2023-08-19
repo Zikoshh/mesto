@@ -1,9 +1,9 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, createNewCard) {
+  constructor(popupSelector, callback) {
     super(popupSelector);
-    this._createNewCard = createNewCard;
+    this._callback = callback;
     this._form = this._popup.querySelector('.popup__form');
   }
 
@@ -30,7 +30,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
 
-      this._createNewCard(this._getInputValues());
+      this._callback(this._getInputValues());
     })
   }
 }

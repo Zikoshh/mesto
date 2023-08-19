@@ -1,8 +1,7 @@
 .card__info {
   color: black;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   min-height: 79px;
-  align-items: center;
-  justify-content: space-between;
   padding: 0 15px 0 21px;
 }

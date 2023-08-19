@@ -14,8 +14,8 @@
     <section class="profile">
       <div class="profile__avatar"></div>
       <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто</h1>
-        <p class="profile__subtitle">Исследователь океана</p>
+        <h1 class="profile__title"></h1>
+        <p class="profile__subtitle"></p>
         <button class="profile__edit-button" type="button"></button>
       </div>
       <button class="profile__add-button" type="button"></button>
@@ -37,7 +37,7 @@
       <button class="popup__close popup__close_edit" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form popup__form_edit" action="#" name="editProfile" novalidate>
-        <label for="username">
+        <label for="userName">
           <input id="userName" class="popup__input popup__input_user-name" name="userName" type="text" placeholder="Введите имя" minlength="2" maxlength="40" required>
           <p class="popup__error userName-error"></p>
         </label>
@@ -73,6 +73,7 @@
       <div class="card__info">
         <h2 class="card__title"></h2>
         <button class="card__like-button" type="button"></button>
+        <span class="card__likes-counter">5</span>
       </div>
     </article>
   </template>

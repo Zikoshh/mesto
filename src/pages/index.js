@@ -1,12 +1,11 @@
 import './index.css';
+import Api from '../components/Api.js';
 
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
-import { initialCards } from '../utils/InitialCards.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
-import UserInfo from '../components/UserInfo.js';
 
 
 
@@ -16,6 +15,9 @@ const inputUserName = editForm.querySelector('.popup__input_user-name');
 const inputAboutUser = editForm.querySelector('.popup__input_about-user');
 const addButton = document.querySelector('.profile__add-button');
 const addForm = document.querySelector('.popup__form_add');
+const userName = document.querySelector('.profile__title');
+const aboutUser = document.querySelector('.profile__subtitle');
+const userAvatar = document.querySelector('.profile__avatar');
 /*Обьект с классами для валидации*/
 const classesForValidation = {
   formInput: 'popup__input',
@@ -25,7 +27,29 @@ const classesForValidation = {
   formErrorActive: 'popup__error_active'
 };
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-72',
+  headers: {
+    authorization: '8021284e-33ae-49a9-9588-39e65f8169ae',
+    'Content-Type': 'application/json'
+  }
+});
 
+api.getInitialCards()
+  .then(arrayCards => {
+    cardsSection.renderItems(arrayCards);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+
+api.getUserInfo()
+  .then(info => {
+    userName.textContent = info.name;
+    aboutUser.textContent = info.about;
+    userAvatar.style.backgroundImage = `url(${info.avatar})`;
+  })
 
 /*Загрузка карточек которых уже есть в data*/ 
 const cardsSection = new Section({ 
@@ -35,7 +59,6 @@ const cardsSection = new Section({
   } 
 }, '.cards');
 
-cardsSection.renderItems(initialCards);
 
 
 /*Возвращает DOM элемент новой карточки*/ 
@@ -58,19 +81,25 @@ function handleCardClick(name, link) {
 /**/ 
 const formEdit = new PopupWithForm('.popup_type_profile-edit', changeProfileInfo);
 formEdit.setEventListeners();
-const userInfo = new UserInfo({ userName: '.profile__title', aboutUser: '.profile__subtitle' });
 
 /*Берет данные из инпутов и изменяет информацию о пользователе*/ 
 function changeProfileInfo(inputValues) {
-  userInfo.setUserInfo(inputValues);
+  api.setUserInfo(inputValues)
+  .then(newInfo => {
+    userName.textContent = newInfo.name;
+    aboutUser.textContent = newInfo.about;
+  })
   formEdit.close();
 };
 
 /*Ставит в value инпутов editPopup'а текущую информацию о пользователе*/ 
 editButton.addEventListener('click', () => {
-  const userInfoData = userInfo.getUserInfo();
-  inputUserName.value = userInfoData.userName;
-  inputAboutUser.value = userInfoData.aboutUser;
+  api.getUserInfo()
+  .then(info => {
+    inputUserName.value = info.name;
+    inputAboutUser.value = info.about;
+  })
+  
   editPopupForm.enableSubmitButton();
   formEdit.open();
 });
@@ -82,8 +111,11 @@ formCard.setEventListeners();
 
 /*Берет value инпутов addPopup'а и создает новую карточку*/ 
 function createNewCard(inputValues) {
-  const newCard = createCard(inputValues, '.card-template', handleCardClick);
-  cardsSection.addItem(newCard);
+  api.addNewCard(inputValues)
+  .then(newCardInfo => {
+    const newCard = createCard(newCardInfo, '.card-template', handleCardClick);
+    cardsSection.addItem(newCard);
+  })
   
   formCard.close();
 };
