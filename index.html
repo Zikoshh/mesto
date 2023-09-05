@@ -13,9 +13,7 @@
   
   <main id="content" class="content">
     <section class="profile">
-      <button class="profile__avatar-edit" type="button">
-        <img class="profile__avatar" alt="Аватар пользователя" src="#">
-      </button>
+      <div class="profile__avatar"></div>
       <div class="profile__info">
         <h1 class="profile__title"></h1>
         <p class="profile__subtitle"></p>
@@ -66,28 +64,6 @@
           <p class="popup__error placeLink-error"></p>
         </label>
         <button class="popup__submit" type="submit">Создать</button>
-      </form>
-    </div>
-  </section>
-  <section class="popup popup_type_delete-card">
-    <div class="popup__container">
-      <button class="popup__close" type="button"></button>
-      <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
-      <form class="popup__form popup__form_delete" action="#" name="deleteCard">
-        <button class="popup__submit" type="submit">Да</button>
-      </form>
-    </div>
-  </section>
-  <section class="popup popup_type_edit-avatar">
-    <div class="popup__container">
-      <button class="popup__close" type="button"></button>
-      <h2 class="popup__title">Обновить аватар</h2>
-      <form class="popup__form popup__form_edit-avatar" action="#" name="editAvatar" novalidate>
-        <label for="placeAvatar">
-          <input id="placeAvatar" class="popup__input" name="link" type="url" placeholder="Ссылка на картинку" required>
-          <p class="popup__error placeAvatar-error"></p>
-        </label>
-        <button class="popup__submit" type="submit">Сохранить</button>
       </form>
     </div>
   </section>
