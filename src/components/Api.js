@@ -5,20 +5,22 @@ export default class Api {
     this._authorizationToken = headers.authorization;
   }
 
+  _getResponse(response) {
+    if (!response.ok) {
+      return Promise.reject(`Ошибка: ${response.status}`);
+    };
+
+    return response.json();
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: {
         authorization: this._authorizationToken
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`Ошибка: ${res.status}`);
-        }
-
-        return res.json();
-      })
-  }
+    .then(this._getResponse);
+  };
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -26,14 +28,8 @@ export default class Api {
         authorization: this._authorizationToken
       }
     })
-      .then(res => {
-        if (!res.ok) {
-          return Promise.reject(`Ошибка: ${res.status}`);
-        }
-
-        return res.json();
-      })
-  }
+    .then(this._getResponse);
+  };
 
   setUserInfo({ userName, aboutUser }) {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -44,10 +40,8 @@ export default class Api {
         about: `${aboutUser}`
       })
     })
-    .then(res => {
-      return res.json();
-    })
-  }
+    .then(this._getResponse);
+  };
 
   addNewCard({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
@@ -58,8 +52,47 @@ export default class Api {
         link: `${link}`
       })
     })
-    .then(res => {
-      return res.json();
+    .then(this._getResponse);
+  };
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorizationToken
+      }
     })
+    .then(this._getResponse);
+  };
+
+  putLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorizationToken
+      }
+    })
+    .then(this._getResponse);
+  };
+
+  removeLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorizationToken
+      }
+    })
+    .then(this._getResponse);
+  };
+
+  changeAvatar(link) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link
+      })
+    })
+    .then(this._getResponse);
   }
 };
