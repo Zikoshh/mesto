@@ -1,5 +1,22 @@
 import './index.css';
 
+import {
+  buttonOpenPopupProfile, 
+  formPopupProfile,
+  buttonSubmitPopupProfile,
+  inputUserName,
+  inputAboutUser,
+  userName,
+  aboutUser,
+  buttonOpenPopupCard,
+  formPopupCard,
+  buttonSubmitPopupCard,
+  userAvatar,
+  buttonOpenPopupAvatar,
+  formPopupAvatar,
+  buttonSubmitPopupAvatar,
+  classesForValidation
+} from '../utils/constants.js'
 import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -7,34 +24,9 @@ import PopupWithDeleteCard from '../components/PopupWithDeleteCard.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 
 
-
-const editButton = document.querySelector('.profile__edit-button');
-const formProfilePopup = document.querySelector('.popup__form_edit');
-const profileSubmitButton = formProfilePopup.querySelector('.popup__submit');
-const inputUserName = formProfilePopup.querySelector('.popup__input_user-name');
-const inputAboutUser = formProfilePopup.querySelector('.popup__input_about-user');
-const userName = document.querySelector('.profile__title');
-const aboutUser = document.querySelector('.profile__subtitle');
-
-const addButton = document.querySelector('.profile__add-button');
-const formCardPopup = document.querySelector('.popup__form_add');
-const cardSubmitButton = formCardPopup.querySelector('.popup__submit');
-
-const userAvatar = document.querySelector('.profile__avatar');
-const editAvatarButton = document.querySelector('.profile__avatar-edit');
-const formAvatarPopup = document.querySelector('.popup__form_edit-avatar');
-const avatarSubmitButton = formAvatarPopup.querySelector('.popup__submit');
-let userId;
-/*Обьект с классами для валидации*/
-const classesForValidation = {
-  formInput: 'popup__input',
-  formInputInvalid: 'popup__input_invalid',
-  formSubmit: 'popup__submit',
-  formSubmitDisabled: 'popup__submit_disabled',
-  formErrorActive: 'popup__error_active'
-};
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-74',
@@ -44,35 +36,31 @@ const api = new Api({
   }
 });
 
-api.getInitialCards()
-  .then(arrayCards => {
-    cardsSection.renderItems(arrayCards);
+
+const userInfo = new UserInfo({ userName, aboutUser, userAvatar });
+let userId;
+
+
+Promise.all([api.getInitialCards(), api.getUserInfo()])
+  .then(([cards, userData]) => {
+    userId = userData._id;
+
+    userInfo.setUserInfo(userData);
+    
+    cardsSection.renderItems(cards);
   })
   .catch(err => {
     console.error(err);
   });
 
-
-api.getUserInfo()
-  .then(info => {
-    userName.textContent = info.name;
-    aboutUser.textContent = info.about;
-    userAvatar.src = info.avatar;
-    userId = info._id;
-  })
-  .catch(err => {
-    console.error(err);
-  });
 
 /*Загрузка карточек которых уже есть в data*/ 
 const cardsSection = new Section({ 
   renderer: (item) => {
     const newCard = createCard(userId, item, '.card-template', handleCardClick, handleDeleteCard, handleLikeClick);
-    cardsSection.addItem(newCard);
+    cardsSection.addCard(newCard);
   } 
 }, '.cards'); 
-
-
 
 /*Возвращает DOM элемент новой карточки*/ 
 function createCard(userId, data, templateSelector, handleCardClick, handleDeleteCard, handleLikeClick) {
@@ -100,124 +88,122 @@ function handleLikeClick(cardId, didUserPutLike) {
   }
 }
 
-const formEditAvatar = new PopupWithForm('.popup_type_edit-avatar', editAvatar);
-formEditAvatar.setEventListeners();
+
+
+const popupEditAvatar = new PopupWithForm('.popup_type_edit-avatar', editAvatar);
+popupEditAvatar.setEventListeners();
 
 function editAvatar({ link }) {
-  avatarSubmitButton.textContent = 'Сохранение...';
+  buttonSubmitPopupAvatar.textContent = 'Сохранение...';
 
   api.changeAvatar(link)
     .then(userData => {
-      userAvatar.src = userData.avatar;
+      userInfo.setUserInfo(userData);
+
+      editAvatarValidation.disableSubmitButton();
+      popupEditAvatar.close();
     })
     .catch(err => {
       console.error(err);
     })
     .finally(() => {
-      avatarSubmitButton.textContent = 'Сохранить';
+      buttonSubmitPopupAvatar.textContent = 'Сохранить';
     });
-
-  editAvatarValidation.disableSubmitButton();
-  formEditAvatar.close();
 }
 
-editAvatarButton.addEventListener('click', () => {
-  formEditAvatar.open()
+buttonOpenPopupAvatar.addEventListener('click', () => {
+  popupEditAvatar.open()
 })
 
 
+
 /**/ 
-const popupWithImage = new PopupWithImage( '.popup_type_full-image' );
-popupWithImage.setEventListeners();
+const popupShowFullImage = new PopupWithImage( '.popup_type_full-image' );
+popupShowFullImage.setEventListeners();
 
 /*Открывает popup image с данными карточки на которую нажали*/ 
 function handleCardClick(name, link) {
-  popupWithImage.open(name, link);
+  popupShowFullImage.open(name, link);
 }
 
 
+
 /**/ 
-const formEdit = new PopupWithForm('.popup_type_profile-edit', changeProfileInfo);
-formEdit.setEventListeners();
+const popupProfileEdit = new PopupWithForm('.popup_type_profile-edit', changeProfileInfo);
+popupProfileEdit.setEventListeners();
 
 /*Берет данные из инпутов и изменяет информацию о пользователе*/ 
 function changeProfileInfo(inputValues) {
-  profileSubmitButton.textContent = 'Сохранение...';
+  buttonSubmitPopupProfile.textContent = 'Сохранение...';
 
   api.setUserInfo(inputValues)
     .then(newInfo => {
-      userName.textContent = newInfo.name;
-      aboutUser.textContent = newInfo.about;
+      userInfo.setUserInfo(newInfo);
+      popupProfileEdit.close();
     })
     .catch(err => {
       console.error(err);
     })
     .finally(() => {
-      profileSubmitButton.textContent = 'Сохранить';
+      buttonSubmitPopupProfile.textContent = 'Сохранить';
     });
-  formEdit.close();
 };
 
 /*Ставит в value инпутов editPopup'а текущую информацию о пользователе*/ 
-editButton.addEventListener('click', () => {
-  api.getUserInfo()
-    .then(info => {
-      inputUserName.value = info.name;
-      inputAboutUser.value = info.about;
-    })
-    .catch(err => {
-      console.error(err);
-    });
+buttonOpenPopupProfile.addEventListener('click', () => {
+  const userData = userInfo.getUserInfo();
   
-  editFormValidation.enableSubmitButton();
-  formEdit.open();
+  inputUserName.value = userData.userName;
+  inputAboutUser.value = userData.aboutUser;
+
+  popupProfileEdit.open();
 });
 
 
+
 /**/ 
-const formCard = new PopupWithForm('.popup_type_add-card', createNewCard);
-formCard.setEventListeners();
+const popupCreateCard = new PopupWithForm('.popup_type_add-card', createNewCard);
+popupCreateCard.setEventListeners();
 
 /*Берет value инпутов addPopup'а и создает новую карточку*/ 
 function createNewCard(inputValues) {
-  cardSubmitButton.textContent = 'Создание...';
+  buttonSubmitPopupCard.textContent = 'Создание...';
 
   api.addNewCard(inputValues)
     .then(newCardInfo => {
       const newCard = createCard(userId, newCardInfo, '.card-template', handleCardClick, handleDeleteCard, handleLikeClick);
-      cardsSection.addItem(newCard);
+      cardsSection.addNewCard(newCard);
+      popupCreateCard.close();
     })
     .catch(err => {
       console.error(err);
     })
     .finally(() => {
-      cardSubmitButton.textContent = 'Создать';
+      buttonSubmitPopupCard.textContent = 'Создать';
     })
-  
-  formCard.close();
 };
  
-addButton.addEventListener('click', () => {
+buttonOpenPopupCard.addEventListener('click', () => {
   addFormValidation.disableSubmitButton();
-  formCard.open();
+  popupCreateCard.open();
 });
 
 
 
-const formDeleteCard = new PopupWithDeleteCard('.popup_type_delete-card', deleteCard);
-formDeleteCard.setEventListeners();
+const popupDeleteCard = new PopupWithDeleteCard('.popup_type_delete-card', deleteCard);
+popupDeleteCard.setEventListeners();
 
-function handleDeleteCard(cardId, card) {
-  formDeleteCard.open();
+function handleDeleteCard(card) {
+  popupDeleteCard.open();
 
-  formDeleteCard.sendCardAndId(cardId, card);
+  popupDeleteCard.sendCard(card);
 };
 
-function deleteCard(cardId) {
-  api.deleteCard(cardId)
+function deleteCard(card) {
+  api.deleteCard(card.id)
     .then(() => {
-      formDeleteCard.deleteElCard();
-      formDeleteCard.close();
+      card.deleteElCard();
+      popupDeleteCard.close();
     })
     .catch(err => {
       console.error(err);
@@ -225,14 +211,15 @@ function deleteCard(cardId) {
 };
 
 
-const editFormValidation = new FormValidator(classesForValidation, formProfilePopup);
+
+const editFormValidation = new FormValidator(classesForValidation, formPopupProfile);
 /*Запускаем валидацию формы редактирования профиля*/
 editFormValidation.enableValidation();
 
-const addFormValidation = new FormValidator(classesForValidation, formCardPopup);
+const addFormValidation = new FormValidator(classesForValidation, formPopupCard);
 /*Запускаем валидацию формы добавления карочек*/
 addFormValidation.enableValidation();
 
-const editAvatarValidation = new FormValidator(classesForValidation, formAvatarPopup);
-
+const editAvatarValidation = new FormValidator(classesForValidation, formPopupAvatar);
+/*Запускаем валидацию формы изменения аватара*/
 editAvatarValidation.enableValidation();

@@ -7,8 +7,7 @@ export default class PopupWithDeleteCard extends Popup {
     this._deleteCard = deleteCard;
   }
 
-  sendCardAndId(cardId, card) {
-    this._cardId = cardId;
+  sendCard(card) {
     this._card = card;
   }
 
@@ -17,12 +16,7 @@ export default class PopupWithDeleteCard extends Popup {
     this._form.addEventListener('submit', evt => {
       evt.preventDefault();
 
-      this._deleteCard(this._cardId);
+      this._deleteCard(this._card);
     })
-  }
-
-  deleteElCard() {
-    this._card.remove();
-    this._card = null;
   }
 }

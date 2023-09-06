@@ -4,7 +4,11 @@ export default class Section {
     this._renderer = renderer;
   }
 
-  addItem(card) {
+  addCard(card) {
+    this._container.append(card);
+  }
+
+  addNewCard(card) {
     this._container.prepend(card);
   }
 

@@ -2,9 +2,9 @@ export default class Card {
   constructor(userId, data, templateSelector, handleCardClick, handleDeleteCard, handleLikeClick) {
     this._name = data.name;
     this._link = data.link;
-    console.log(data.likes)
     this._likes = data.likes;
-    this._id = data._id;
+    this.id = data._id;
+    console.log(userId);
     this._userId = userId;
     this._ownerId = data.owner._id;
     this._handleDeleteCard = handleDeleteCard;
@@ -25,7 +25,7 @@ export default class Card {
     this._checkCardOwner();
     
     this._newCardLike.addEventListener('click', () => {
-      this._handleLikeClick(this._id, this._didUserPutLike());
+      this._handleLikeClick(this.id, this._didUserPutLike());
     });
 
     this._newCardImage.addEventListener('click', () => {
@@ -48,12 +48,17 @@ export default class Card {
   _checkCardOwner() {
     if (this._ownerId === this._userId) {
       this._newCardDelete.addEventListener('click', () => {
-        this._handleDeleteCard(this._id, this._newCard);
+        this._handleDeleteCard(this);
       });
     } else {
       this._newCardDelete.remove();
       this._newCardDelete = null;
     }
+  }
+
+  deleteElCard() {
+    this._newCard.remove();
+    this._newCard = null;
   }
 
   generateCard() {
