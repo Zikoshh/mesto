@@ -70,7 +70,7 @@ const cardsSection = new Section({
     const newCard = createCard(userId, item, '.card-template', handleCardClick, handleDeleteCard, handleLikeClick);
     cardsSection.addItem(newCard);
   } 
-}, '.cards');
+}, '.cards'); 
 
 
 
